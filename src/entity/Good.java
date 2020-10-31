@@ -5,22 +5,23 @@ import java.util.Objects;
 
 public class Good implements Serializable{
     private String name;
-    private Double price;
-    private int volume;
-    private int weight;
+    private Double weight;
     private String manufacturer;
-    private String description;
-    private String originCountry;
+
 
     public Good() {
     }
 
-    public Good(String name, Double price, String manufacturer, String description, String originCountry) {
+    public Good(String name, Double weight, Double price, String manufacturer) {
         this.name = name;
-        this.price = price;
+        this.weight = weight;
         this.manufacturer = manufacturer;
-        this.description = description;
-        this.originCountry = originCountry;
+    }
+
+    public Good(String name, String weight, String manufacturer) {
+        this.name = name;
+        setWeight(weight);
+        this.manufacturer = manufacturer;
     }
 
     public String getName() {
@@ -31,14 +32,23 @@ public class Good implements Serializable{
         this.name = name;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getWeight() {
+        return weight;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 
+    public void setWeight(String weight) {
+        try {
+            Double weightDouble = Double.parseDouble(weight);
+            this.weight = weightDouble;
+        } catch (Exception e) {
+            System.out.println("Вы ввели не числовое значение. Значение не изменено.");
+        }
+    }
+    
     public String getManufacturer() {
         return manufacturer;
     }
@@ -47,35 +57,17 @@ public class Good implements Serializable{
         this.manufacturer = manufacturer;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getOriginCountry() {
-        return originCountry;
-    }
-
-    public void setOriginCountry(String originCountry) {
-        this.originCountry = originCountry;
-    }
-
     @Override
     public String toString() {
-        return "Goods{" + "name=" + name + ", price=" + price + ", manufacturer=" + manufacturer + ", description=" + description + ", originCountry=" + originCountry + '}';
+        return "Good{" + "name=" + name + ", weight=" + weight + ", manufacturer=" + manufacturer + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 13 * hash + Objects.hashCode(this.name);
-        hash = 13 * hash + Objects.hashCode(this.price);
-        hash = 13 * hash + Objects.hashCode(this.manufacturer);
-        hash = 13 * hash + Objects.hashCode(this.description);
-        hash = 13 * hash + Objects.hashCode(this.originCountry);
+        hash = 41 * hash + Objects.hashCode(this.name);
+        hash = 41 * hash + Objects.hashCode(this.weight);
+        hash = 41 * hash + Objects.hashCode(this.manufacturer);
         return hash;
     }
 
@@ -97,18 +89,12 @@ public class Good implements Serializable{
         if (!Objects.equals(this.manufacturer, other.manufacturer)) {
             return false;
         }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.originCountry, other.originCountry)) {
-            return false;
-        }
-        if (!Objects.equals(this.price, other.price)) {
+        if (!Objects.equals(this.weight, other.weight)) {
             return false;
         }
         return true;
     }
-    
-    
+
+
     
 }

@@ -1,9 +1,10 @@
 
 package entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
     private String login;
     private String password;
     private String role;
@@ -16,7 +17,6 @@ public class User {
         this.login = login;
         this.password = password;
         this.role = role;
-        this.customer = customer;
     }
 
     public String getLogin() {

@@ -3,8 +3,11 @@ package tools;
 import entity.Customer;
 import java.util.List;
 import java.util.Scanner;
+import shop.App;
 
 public class CustomerManager {
+    private FileStorageManager storMan = new FileStorageManager();
+    
     public Customer createCustomer(){
         Customer customer = new Customer();
         Scanner scanner = new Scanner(System.in);
@@ -20,6 +23,7 @@ public class CustomerManager {
     
     public void addCustomerToArray(Customer customer, List<Customer> listCustomers){
         listCustomers.add(customer);
+        storMan.save(listCustomers, App.storageFiles.CUSTOMERS.toString());
     }
     
     public void printListCustomers(List<Customer> customers){

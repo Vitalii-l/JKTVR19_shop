@@ -5,6 +5,7 @@ import entity.User;
 import java.util.List;
 import java.util.Scanner;
 import security.SecureManager;
+import shop.App;
 
 /**
  *
@@ -13,6 +14,7 @@ import security.SecureManager;
  */
 public class UserManager {
     Scanner scanner = new Scanner(System.in);
+    private FileStorageManager storageManager = new FileStorageManager();
     
     public User createUser(){
         CustomerManager customerManager = new CustomerManager();
@@ -48,6 +50,7 @@ public class UserManager {
     
     public void addUserToArray(User user, List<User> listUsers){
         listUsers.add(user);
+        storageManager.save(listUsers, App.storageFiles.USERS.toString());
     }
     
     public void printListUsers(List<User> listUsers) {
@@ -70,18 +73,18 @@ public class UserManager {
             if (users.get(i) != null && users.get(i).getLogin().equals(login)){
                 for (int j = 0; j < 2; j++) {
                     if (users.get(i).getPassword().equals(password)) {
-                        System.out.println("Login successful.");
+                        System.out.println("Успешный вход.");
                         return users.get(i);
                     } else {
-                        System.out.println("Wrong password. You still have "+(2-j)+" attempt.");
+                        System.out.println("Неверный пароль. Осталось "+(2-j)+" попытки.");
                         password = scanner.nextLine();
                     }
                 }
-                System.out.println("Get out of here!");
+                System.out.println("Давай, до свидания!");
                 return null;
             }
         }
-        System.out.println("Login not found");
+        System.out.println("Пользователь не существует");
         return null;
     }
     
