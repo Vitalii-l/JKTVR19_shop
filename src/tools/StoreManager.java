@@ -26,6 +26,9 @@ public class StoreManager {
         }
     }
     
+    public void addStoreToArray (Store store, List<Store> listStore){
+        listStore.add(store);
+    }
     
     
 }

@@ -36,17 +36,18 @@ public class GoodManager {
         System.out.println("--- Добавление нового товара ---");
         System.out.println("Введите название товара:");
         good.setName(scanner.nextLine());
-        System.out.println("Далее введите одну из величин вес или объем, для другой нажмите Enter, чтобы оставить это поле пустым.");
-        do {                
+        Double numWeight;
+        do {
             System.out.println("Введите вес товара:");
             String strGoodWeight = scanner.nextLine();
             try {
-                good.setWeight(Double.parseDouble(strGoodWeight));
+                numWeight = Double.parseDouble(strGoodWeight);
                 break;
             } catch (Exception e) {
                 System.out.println("Введите числовое значение");
             }
         } while (true);
+        good.setWeight(numWeight);
         
         System.out.println("Введите производителя товара:");
         good.setManufacturer(scanner.nextLine());
