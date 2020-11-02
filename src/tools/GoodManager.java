@@ -17,14 +17,19 @@ import shop.App;
 public class GoodManager {
     private FileStorageManager storageManager = new FileStorageManager();
     
-    public void printListGoods(List<Good> listGoods) {
+    public boolean printListGoods(List<Good> listGoods) {
+        if(listGoods == null || listGoods.size() < 1){
+            System.out.println("Товаров нет!");
+            return false;
+        }
         System.out.println("Список товаров");
         int i = 0;
         for (Good l : listGoods) {
             if(l != null){
                 System.out.println(i+1+". "+l.toString());
-                i++;}            
+                i++;}          
         }
+        return true;
     }
     public void addGoodToArray(Good good, List<Good> listGoods){
         listGoods.add(good);
